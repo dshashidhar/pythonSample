@@ -60,7 +60,7 @@ class Counter:
         file_name = url.split('/')[-1]
         print "testc",file_name
         #cap = cv2.VideoCapture(0)
-        cap = cv2.VideoCapture("../"+file_name)
+        cap = cv2.VideoCapture("./../"+file_name)
 
         #Propiedades del video
         cap.set(3,1280)
