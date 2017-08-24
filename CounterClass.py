@@ -6,6 +6,7 @@ import urllib2,urllib
 import datetime
 import math
 import urlparse
+import os
 
 
 
@@ -61,6 +62,9 @@ class Counter:
         file_name = url.split('/')[-1]
         print "testc",file_name
         #cap = cv2.VideoCapture(0)
+        #os.path.exists(file_path)
+
+        print os.path.dirname(os.path.abspath(__file__))
         cap = cv2.VideoCapture("/home/dshashidar/"+file_name)
 
         #Propiedades del video
