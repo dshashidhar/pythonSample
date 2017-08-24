@@ -64,8 +64,8 @@ class Counter:
         #cap = cv2.VideoCapture(0)
         #os.path.exists(file_path)
 
-        print os.path.dirname(os.path.abspath(__file__))
-        cap = cv2.VideoCapture(os.path.dirname(__file__) + "/../"+file_name)
+        print os.path.dirname(os.path.abspath("../"+file_name))
+        cap = cv2.VideoCapture("../"+file_name)
 
         #Propiedades del video
         cap.set(3,1280)
