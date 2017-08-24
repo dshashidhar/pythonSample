@@ -167,7 +167,7 @@ class Counter:
             #################
 
             # RETR_EXTERNAL returns only extreme outer flags. All child contours are left behind.
-            image1 , contours0, hierarchy = cv2.findContours(mask2,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
+            contours0, hierarchy = cv2.findContours(mask2,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
             for cnt in contours0:
                 area = cv2.contourArea(cnt)
                 if area > areaTH:
