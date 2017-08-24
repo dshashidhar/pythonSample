@@ -245,6 +245,6 @@ class Counter:
 
 
         cap.release()
-        cv2.destroyAllWindows()
+        #cv2.destroyAllWindows()
         return countList
 
