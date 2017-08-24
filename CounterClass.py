@@ -51,6 +51,7 @@ class Counter:
         f.close()
 
     def calculateCounter(self,url):
+        print "version", cv2.__version__
         countList = []
         existCountList = []
         self.downloadFile(url)
