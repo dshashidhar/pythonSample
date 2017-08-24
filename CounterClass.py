@@ -132,7 +132,7 @@ class Counter:
             #Lee una imagen de la fuente de video
             ret, frame = cap.read()
         ##    frame = image.array
-
+            print "hiii"
             frameCount += 1
            #  print (frame,fps)
             for i in persons:
