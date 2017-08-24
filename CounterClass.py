@@ -108,7 +108,7 @@ class Counter:
         pts_L4 = pts_L4.reshape((-1,1,2))
 
         #Substractor de fondo
-        fgbg = cv2.BackgroundSubtractorMOG()
+        fgbg = cv2.createBackgroundSubtractorMOG2(detectShadows = False)
         #createBackgroundSubtractorMOG2(detectShadows = False)
 
         #Elementos estructurantes para filtros morfoogicos
@@ -125,8 +125,8 @@ class Counter:
         starttime = datetime.datetime.now()
         frameCount = 0
         #cv.CV_CAP_PROP_FRAME_COUNT
-        length = int(cap.get(cv2.cv.CV_CAP_PROP_FRAME_COUNT))
-        fps = cap.get(cv2.cv.CV_CAP_PROP_FPS)
+        length = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
+        fps = cap.get(cv2.CAP_PROP_FPS)
 
         while(cap.isOpened()):
         ##for image in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
@@ -168,7 +168,7 @@ class Counter:
             #################
 
             # RETR_EXTERNAL returns only extreme outer flags. All child contours are left behind.
-            contours0, hierarchy = cv2.findContours(mask2,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
+            _, contours0, hierarchy = cv2.findContours(mask2,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
             for cnt in contours0:
                 area = cv2.contourArea(cnt)
                 if area > areaTH:
