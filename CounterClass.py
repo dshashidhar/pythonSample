@@ -51,7 +51,7 @@ class Counter:
         f.close()
 
     def calculateCounter(self,url):
-        print "version", cv2.__version__
+        print "version ----", cv2.__version__
         countList = []
         existCountList = []
         self.downloadFile(url)
@@ -61,7 +61,7 @@ class Counter:
         file_name = url.split('/')[-1]
         print "testc",file_name
         #cap = cv2.VideoCapture(0)
-        cap = cv2.VideoCapture(file_name)
+        cap = cv2.VideoCapture("../"+file_name)
 
         #Propiedades del video
         cap.set(3,1280)
@@ -129,6 +129,7 @@ class Counter:
         fps = cap.get(cv2.CAP_PROP_FPS)
 
         while(cap.isOpened()):
+            print  "opened"
         ##for image in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
             #Lee una imagen de la fuente de video
             ret, frame = cap.read()
