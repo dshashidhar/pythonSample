@@ -107,7 +107,8 @@ class Counter:
         pts_L4 = pts_L4.reshape((-1,1,2))
 
         #Substractor de fondo
-        fgbg = cv2.createBackgroundSubtractorMOG2(detectShadows = False)
+        fgbg = cv2.BackgroundSubtractorMOG()
+        #createBackgroundSubtractorMOG2(detectShadows = False)
 
         #Elementos estructurantes para filtros morfoogicos
         kernelOp = np.ones((3,3),np.uint8)
