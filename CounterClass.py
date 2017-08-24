@@ -124,8 +124,8 @@ class Counter:
         starttime = datetime.datetime.now()
         frameCount = 0
         #cv.CV_CAP_PROP_FRAME_COUNT
-        length = int(cap.get(cv2.cv.CAP_PROP_FRAME_COUNT))
-        fps = cap.get(cv2.cv.CAP_PROP_FPS)
+        length = int(cap.get(cv.CAP_PROP_FRAME_COUNT))
+        fps = cap.get(cv.CAP_PROP_FPS)
 
         while(cap.isOpened()):
         ##for image in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):

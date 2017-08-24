@@ -40,11 +40,11 @@
       <file leaf-file-name="CounterClass.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/CounterClass.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="335">
-              <caret line="129" column="30" lean-forward="true" selection-start-line="129" selection-start-column="30" selection-end-line="129" selection-end-column="30" />
+            <state relative-caret-position="113">
+              <caret line="125" column="35" lean-forward="true" selection-start-line="125" selection-start-column="35" selection-end-line="125" selection-end-column="35" />
               <folding>
                 <element signature="e#0#18#0" expanded="true" />
-                <element signature="e#8831#9058#0" expanded="false" />
+                <element signature="e#8823#9050#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -213,11 +213,11 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/CounterClass.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="335">
-          <caret line="129" column="30" lean-forward="true" selection-start-line="129" selection-start-column="30" selection-end-line="129" selection-end-column="30" />
+        <state relative-caret-position="113">
+          <caret line="125" column="35" lean-forward="true" selection-start-line="125" selection-start-column="35" selection-end-line="125" selection-end-column="35" />
           <folding>
             <element signature="e#0#18#0" expanded="true" />
-            <element signature="e#8831#9058#0" expanded="false" />
+            <element signature="e#8823#9050#0" expanded="false" />
           </folding>
         </state>
       </provider>
