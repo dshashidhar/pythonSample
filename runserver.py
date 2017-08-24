@@ -7,12 +7,12 @@ import argparse
 
 import flask_app
 
-parser = argparse.ArgumentParser(description="")
+parser = argparse.ArgumentParser(description="*")
 parser.add_argument(
     "--port", "-p",
     type=int,
     help="Port to listen on",
-    default=2006,
+    default=2007,
 )
 args = parser.parse_args()
 
@@ -24,5 +24,5 @@ if __name__ == '__main__':
         threaded=True,
     )
 
-    flask_app.run(**flask_options)
+    flask_app.app.run(**flask_options)
 
