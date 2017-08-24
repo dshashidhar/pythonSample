@@ -5,9 +5,9 @@ from __future__ import unicode_literals
 import sys
 import argparse
 
-from uploadr.app import app
+import flask_app
 
-parser = argparse.ArgumentParser(description="Uploadr")
+parser = argparse.ArgumentParser(description="")
 parser.add_argument(
     "--port", "-p",
     type=int,
@@ -24,5 +24,5 @@ if __name__ == '__main__':
         threaded=True,
     )
 
-    app.run(**flask_options)
+    flask_app.run(**flask_options)
 

@@ -38,32 +38,32 @@ def upload():
         else:
             return "Couldn't create upload directory: {}".format(target)
 
-print "=== Form Data ==="
+    print "=== Form Data ==="
     for key, value in form.items():
         print key, "=>", value
 
-for upload in request.files.getlist("file"):
-    filename = upload.filename.rsplit("/")[0]
+    for upload in request.files.getlist("file"):
+        filename = upload.filename.rsplit("/")[0]
         destination = "/".join([target, filename])
         print "Accept incoming file:", filename
         print "Save it to:", destination
         upload.save(destination)
-    
-    if is_ajax:
-        return ajax_response(True, upload_key)
-else:
-    return redirect(url_for("upload_complete", uuid=upload_key))
+
+        if is_ajax:
+            return ajax_response(True, upload_key)
+    else:
+        return redirect(url_for("upload_complete", uuid=upload_key))
 
 
 @app.route("/files/<uuid>")
 def upload_complete(uuid):
     """The location we send them to at the end of the upload."""
-    
+
     # Get their files.
     root = "uploadr/static/uploads/{}".format(uuid)
     if not os.path.isdir(root):
         return "Error: UUID not found!"
-    
+
     files = []
     for file in glob.glob("{}/*.*".format(root)):
         fname = file.split(os.sep)[-1]
