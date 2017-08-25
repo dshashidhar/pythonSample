@@ -31,7 +31,7 @@ class Counter:
         print urlSplitList
         url = urlSplitList.scheme + "://" + urlSplitList.hostname + "/" + '/'.join(pathArray)
         u = urllib2.urlopen(url)
-        f = open("mysite/"+file_name, 'wb')
+        f = open("mysite/mysite/"+file_name, 'wb')
         meta = u.info()
         file_size = int(meta.getheaders("Content-Length")[0])
         print "Downloading: %s Bytes: %s" % (file_name, file_size)
@@ -65,7 +65,7 @@ class Counter:
 
         vfile  = os.path.abspath(file_name)
         print vfile
-        cap = cv2.VideoCapture("mysite/"+file_name)
+        cap = cv2.VideoCapture(file_name)
 
 
         cap.set(3,1280)
