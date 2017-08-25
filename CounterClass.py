@@ -63,7 +63,8 @@ class Counter:
         print "testc",file_name
 
 
-        vfile  = os.path.abspath("mysite/"+file_name)
+        vfile  = os.path.abspath(file_name)
+        print vfile
         cap = cv2.VideoCapture(file_name)
 
 
@@ -235,6 +236,6 @@ class Counter:
 
 
         cap.release()
-        cv2.destroyAllWindows()
+        #cv2.destroyAllWindows()
         return countList
 
