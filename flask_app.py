@@ -73,7 +73,7 @@ def upload_complete(uuid):
                            uuid=uuid,
                            files=files,
                            )
-@app.route("/abc")
+@app.route("/vr")
 def processVideo():
     args = request.args
     print (args['url'])

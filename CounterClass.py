@@ -12,7 +12,7 @@ import os
 
 class Counter:
     def __init__(self):
-        # Each rocket has an (x,y) position.
+
         self.x = 0
         self.y = 0
     def downloadFile(self,urlString):
@@ -31,7 +31,7 @@ class Counter:
         print urlSplitList
         url = urlSplitList.scheme + "://" + urlSplitList.hostname + "/" + '/'.join(pathArray)
         u = urllib2.urlopen(url)
-        f = open(file_name, 'wb')
+        f = open("mysite/"+file_name, 'wb')
         meta = u.info()
         file_size = int(meta.getheaders("Content-Length")[0])
         print "Downloading: %s Bytes: %s" % (file_name, file_size)
@@ -56,23 +56,22 @@ class Counter:
         countList = []
         existCountList = []
         self.downloadFile(url)
-    #Contadores de entrada y salida
+
         cnt_up   = 0
         cnt_down = 0
         file_name = url.split('/')[-1]
         print "testc",file_name
-        #cap = cv2.VideoCapture(0)
-        #os.path.exists(file_path)
 
-        vfile  = os.path.abspath("../"+file_name)
-        cap = cv2.VideoCapture(vfile)
 
-        #Propiedades del video
+        vfile  = os.path.abspath("mysite/"+file_name)
+        cap = cv2.VideoCapture(file_name)
+
+
         cap.set(3,1280)
         cap.set(4,1024)
         cap.set(15, 0.1)
 
-        #Imprime las propiedades de captura a consola
+
         for i in range(19):
             print i, cap.get(i)
 
@@ -82,7 +81,7 @@ class Counter:
         areaTH = frameArea/250
         print 'Area Threshold', areaTH
 
-        #Lineas de entrada/salida
+
         line_up = int(2*(h/5))
         line_down   = int(3*(h/5))
 
@@ -111,11 +110,11 @@ class Counter:
         pts_L4 = np.array([pt7,pt8], np.int32)
         pts_L4 = pts_L4.reshape((-1,1,2))
 
-        #Substractor de fondo
+
         fgbg = cv2.createBackgroundSubtractorMOG2(detectShadows = False)
         #createBackgroundSubtractorMOG2(detectShadows = False)
 
-        #Elementos estructurantes para filtros morfoogicos
+
         kernelOp = np.ones((3,3),np.uint8)
         kernelOp2 = np.ones((5,5),np.uint8)
         kernelCl = np.ones((11,11),np.uint8)
@@ -134,8 +133,7 @@ class Counter:
 
         while(cap.isOpened()):
             print  "opened"
-        ##for image in camera.capture_continuous(rawCapture, format="bgr", use_video_port=True):
-            #Lee una imagen de la fuente de video
+
             ret, frame = cap.read()
         ##    frame = image.array
             #print "hiii"
@@ -143,22 +141,18 @@ class Counter:
            #  print (frame,fps)
             for i in persons:
                 i.age_one() #age every person one frame
-            #########################
-            #   PRE-PROCESAMIENTO   #
-            #########################
 
-            #Aplica substraccion de fondo
             fgmask = fgbg.apply(frame)
             fgmask2 = fgbg.apply(frame)
 
-            #Binariazcion para eliminar sombras (color gris)
+
             try:
                 ret,imBin= cv2.threshold(fgmask,200,255,cv2.THRESH_BINARY)
                 ret,imBin2 = cv2.threshold(fgmask2,200,255,cv2.THRESH_BINARY)
-                #Opening (erode->dilate) para quitar ruido.
+
                 mask = cv2.morphologyEx(imBin, cv2.MORPH_OPEN, kernelOp)
                 mask2 = cv2.morphologyEx(imBin2, cv2.MORPH_OPEN, kernelOp)
-                #Closing (dilate -> erode) para juntar regiones blancas.
+
                 mask =  cv2.morphologyEx(mask , cv2.MORPH_CLOSE, kernelCl)
                 mask2 = cv2.morphologyEx(mask2, cv2.MORPH_CLOSE, kernelCl)
             except:
@@ -168,20 +162,14 @@ class Counter:
                 countList.append({"out":cnt_up, "inside": cnt_down})
                 return countList
                 break
-            #################
-            #   CONTORNOS   #
-            #################
+
 
             # RETR_EXTERNAL returns only extreme outer flags. All child contours are left behind.
             _, contours0, hierarchy = cv2.findContours(mask2,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
             for cnt in contours0:
                 area = cv2.contourArea(cnt)
                 if area > areaTH:
-                    #################
-                    #   TRACKING    #
-                    #################
 
-                    #Falta agregar condiciones para multipersonas, salidas y entradas de pantalla.
 
                     M = cv2.moments(cnt)
                     cx = int(M['m10']/M['m00'])
@@ -192,9 +180,9 @@ class Counter:
                     if cy in range(up_limit,down_limit):
                         for i in persons:
                             if abs(cx-i.getX()) <= w and abs(cy-i.getY()) <= h:
-                                # el objeto esta cerca de uno que ya se detecto antes
+
                                 new = False
-                                i.updateCoords(cx,cy)   #actualiza coordenadas en el objeto and resets age
+                                i.updateCoords(cx,cy)
                                 if i.going_UP(line_down,line_up) == True:
                                     if not (i.getId() in  existCountList):
                                         existCountList.append(i.getId())
@@ -206,7 +194,7 @@ class Counter:
                                         timeFrame = divmod(duration, 60)
                                         mmssTime =  str(int(timeFrame[0]))+ " Minute " + str(int(math.ceil(timeFrame[1]))) + " Seconds"
                                         print mmssTime, new
-                                        countList.append({"action": "going outside side", "time": mmssTime })
+                                        countList.append({"action": "Out", "time": mmssTime })
                                         print "ID:",i.getId(),'crossed going up at',time.strftime("%c")
 
 
@@ -222,7 +210,7 @@ class Counter:
                                         mmssTime = str(int(timeFrame[0])) + " Minute " + str(
                                             int(math.ceil(timeFrame[1]))) + " Seconds"
                                         print mmssTime, new
-                                        countList.append({"action": "coming in side", "time": mmssTime})
+                                        countList.append({"action": "In", "time": mmssTime})
                                         print "ID:",i.getId(),'crossed going down at',time.strftime("%c")
                                 break
                             if i.getState() == '1':
@@ -232,23 +220,21 @@ class Counter:
                                     i.setDone()
 
                             if i.timedOut():
-                                #sacar i de la lista persons
+
                                 index = persons.index(i)
                                 persons.pop(index)
-                                del i     #liberar la memoria de i
+                                del i
                         if new == True:
                             p = Person.MyPerson(pid,cx,cy, max_p_age)
                             persons.append(p)
                             pid += 1
-                    #################
-                    #   DIBUJOS     #
-                    #################
+
                     cv2.circle(frame,(cx,cy), 5, (0,0,255), -1)
                     img = cv2.rectangle(frame,(x,y),(x+w,y+h),(0,255,0),2)
                     #cv2.drawContours(frame, cnt, -1, (0,255,0), 3)
 
 
         cap.release()
-        #cv2.destroyAllWindows()
+        cv2.destroyAllWindows()
         return countList
 
