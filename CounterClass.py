@@ -65,7 +65,7 @@ class Counter:
 
         vfile  = os.path.abspath(file_name)
         print vfile
-        cap = cv2.VideoCapture(file_name)
+        cap = cv2.VideoCapture("../"+file_name)
         print cap
 
 
