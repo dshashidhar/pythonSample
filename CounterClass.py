@@ -81,7 +81,7 @@ class Counter:
         h = 400#cap.get(4)
         frameArea = h*w
         areaTH = frameArea/250
-        print 'Area Threshold', areaTH
+        print 'Area Threshold1', areaTH
 
 
         line_up = int(2*(h/5))
