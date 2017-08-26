@@ -132,7 +132,7 @@ class Counter:
         #cv.CV_CAP_PROP_FRAME_COUNT
         length = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
         fps = cap.get(cv2.CAP_PROP_FPS)
-
+        print  "length" , length, fps
         while(cap.isOpened()):
             print  "opened"
 
