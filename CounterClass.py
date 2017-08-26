@@ -77,8 +77,8 @@ class Counter:
         for i in range(19):
             print i, cap.get(i)
 
-        w = cap.get(3)
-        h = cap.get(4)
+        w =  300#cap.get(3)
+        h = 400#cap.get(4)
         frameArea = h*w
         areaTH = frameArea/250
         print 'Area Threshold', areaTH
