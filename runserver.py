@@ -5,7 +5,7 @@ from __future__ import unicode_literals
 import sys
 import argparse
 
-import flask_app
+import app
 
 parser = argparse.ArgumentParser(description="*")
 parser.add_argument(
@@ -24,5 +24,5 @@ if __name__ == '__main__':
         threaded=True,
     )
 
-    flask_app.app.run(**flask_options)
+    app.app.run(**flask_options)
 
